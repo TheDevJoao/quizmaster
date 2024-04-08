@@ -46,7 +46,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  gem "pry"
 end
 
 group :development do
@@ -65,3 +65,11 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "bcrypt", "~> 3.1"
+
+gem "simple_form", "~> 5.3"
+
+gem "attr_json", "~> 2.3"
+
+gem "devise", "~> 4.9"

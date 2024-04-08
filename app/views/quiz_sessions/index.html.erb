@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= error %></p>
+
+<h1>Quiz sessions</h1>
+
+<div id="quiz_sessions">
+  <% @quiz_sessions.each do |quiz_session| %>
+    <div id="<%= dom_id quiz_session %>" style="border: 1px black solid; display: block; max-width: 300px; padding: 10px; margin: 10px">
+      <p>
+        <strong>Quiz:</strong>
+        <%= quiz_session.quiz_snapshot.dig('config', 'title') %>
+      </p>
+
+      <p>
+        <strong>Answered at:</strong>
+        <%= quiz_session.created_at %>
+      </p>
+
+      <%= render "quiz_sessions/results/#{quiz_session.result['type']}", quiz_session: quiz_session %>
+
+      <p>
+        <%= link_to "Show this quiz session", quiz_session %>
+      </p>
+    </div>
+
+  <% end %>
+</div>
+
+<%= link_to "New Session", quizzes_path %>

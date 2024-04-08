@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= error %></p>
+
+<h2>Answers:</h2>
+<% @quiz_session.quiz_snapshot['questions'].sort_by { |q| q['order'] }.each do |q| %>
+  <div>
+    <h3><%= q["statement"] %></h3>
+    
+    <form>
+      <% q.dig("config", "alternatives").each do |a| %>
+        <div style="display: inline-block;">
+          <%= label :answer, "alternative_#{a["identifier"]}", a["text"] %>
+          <% checked = @quiz_session.answers.find { |answer| answer['question'] == q['question_identifier'] }['alternative'] == a['identifier']  %>
+          <%= radio_button :answer, :alternative, a["identifier"], disabled: true, style: "margin-right: 15px", checked: checked %>
+        </div>
+      <% end %>
+    </form>
+  </div>
+<% end %>
+<br>
+<%= render "quiz_sessions/results/#{@quiz_session.result['type']}", quiz_session: @quiz_session %>  
+<br>
+<div>
+  <p>
+    <%= link_to "Edit this quiz session", edit_quiz_session_step_path(quiz_session_id: @quiz_session.id, id: 1) %> |
+    <%= link_to "Back to quiz sessions", quiz_sessions_path %>
+  </p>
+
+  <%= button_to "Destroy this quiz session", @quiz_session, method: :delete %>
+</div>

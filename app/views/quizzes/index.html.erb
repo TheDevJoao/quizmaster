@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= error %></p>
+
+<h1>Quizzes</h1>
+
+<div id="quizzes">
+  <% @quizzes.each do |quiz| %>
+    <%= render quiz %>
+  <% end %>
+</div>
+
+<%#= link_to "New quiz", new_quiz_path %>

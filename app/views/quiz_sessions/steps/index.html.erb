@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= error %></p>
+
+<h1>Steps</h1>
+
+<div id="quiz_sessions_steps">
+  <% @quiz_sessions_steps.each do |quiz_sessions_step| %>
+    <%= render quiz_sessions_step %>
+    <p>
+      <%= link_to "Show this step", quiz_sessions_step %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New step", new_quiz_sessions_step_path %>

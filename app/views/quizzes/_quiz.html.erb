@@ -1,0 +1,13 @@
+<div id="<%= dom_id quiz %>" style="border: 1px black solid; display: block; max-width: 300px; padding: 10px; margin: 10px">
+  <div>
+    <strong>Title:</strong>
+    <%= quiz.title %>
+  </div>
+
+  <div>
+    <strong>Details:</strong>
+    <%= quiz.description %>
+  </div>
+
+  <%= button_to "Start!", { params: { quiz_session: { quiz_id: quiz.id } }, controller: 'quiz_sessions' }, method: :post  %>
+</div>

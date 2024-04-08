@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= error %></p>
+
+<%= render @quiz_sessions_step %>
+
+<div>
+  <%= link_to "Edit this step", edit_quiz_sessions_step_path(@quiz_sessions_step) %> |
+  <%= link_to "Back to steps", quiz_sessions_steps_path %>
+
+  <%= button_to "Destroy this step", @quiz_sessions_step, method: :delete %>
+</div>

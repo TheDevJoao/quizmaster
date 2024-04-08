@@ -1,0 +1,31 @@
+<%= form_with(url: quiz_session_step_path(quiz_session_id: params[:quiz_session_id], id: params[:id]), method: :patch) do |form| %>
+  <% if quiz_sessions_step&.dig(:failure, :errors)&.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(quiz_sessions_step.dig(:failure, :errors).count, "error") %> prohibited this step from being saved:</h2>
+
+      <ul>
+        <% quiz_sessions_step.dig(:failure, :errors).each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2><%= quiz_sessions_step["statement"] %></h2>
+
+  <%= hidden_field(:answer, :question, :value => quiz_sessions_step['question_identifier']) %>
+  
+  <% quiz_sessions_step.dig("config", "alternatives").each do |a| %>
+    <div>
+      <%= radio_button :answer, :alternative, a["identifier"], checked: quiz_sessions_step.dig(:answer, 'alternative') == a["identifier"] %>
+      <%= label :answer, "alternative_#{a["identifier"]}", a["text"] %>
+    </div>
+  <% end %>
+
+  <br>
+
+  <div>
+    <%= link_to("Back", quiz_session_step_path(quiz_session_id: params[:quiz_session_id], id: quiz_sessions_step[:previous_step])) if quiz_sessions_step[:previous_step] %>
+    <%= form.submit(quiz_sessions_step[:last_step] ? "Finish" : "Submit") %>
+  </div>
+<% end %>
