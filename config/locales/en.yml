@@ -29,3 +29,15 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        quiz:
+          attributes:
+            base:
+              weight_must_be_100: "Weight must be 100"
+              must_have_questions: "Must have questions"
+        question:
+          attributes:
+            base:
+              must_have_alternatives: "Must have alternatives"

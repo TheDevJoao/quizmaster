@@ -73,3 +73,6 @@ gem "simple_form", "~> 5.3"
 gem "attr_json", "~> 2.3"
 
 gem "devise", "~> 4.9"
+
+gem 'jquery-rails'
+gem 'cocoon'
