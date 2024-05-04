@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionAnswer < ApplicationRecord
   belongs_to :quiz_answer
   belongs_to :quiz_question

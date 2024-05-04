@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
 
@@ -6,5 +8,5 @@ Rails.application.routes.draw do
   end
   resources :questions, only: %i[index new create destroy]
 
-  root "quizzes#index"
+  root 'quizzes#index'
 end

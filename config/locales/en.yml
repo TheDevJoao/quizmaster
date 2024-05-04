@@ -35,8 +35,16 @@ en:
         quiz:
           attributes:
             base:
-              weight_must_be_100: "Weight must be 100"
+              weight_must_be_one_hundred: "Weight must be 100"
               must_have_questions: "Must have questions"
+        quiz_question:
+          attributes:
+            base:
+              weight_must_be_integer: "Weight must be integer"
+        quiz_answer:
+          attributes:
+            base:
+              must_have_answers: "Must have answers"
         question:
           attributes:
             base:

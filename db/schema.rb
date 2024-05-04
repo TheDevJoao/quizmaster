@@ -25,13 +25,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
   end
 
   create_table "question_answers", force: :cascade do |t|
-    t.bigint "quiz_answers_id", null: false
+    t.bigint "quiz_answer_id", null: false
     t.bigint "quiz_question_id", null: false
     t.bigint "alternative_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["alternative_id"], name: "index_question_answers_on_alternative_id"
-    t.index ["quiz_answers_id"], name: "index_question_answers_on_quiz_answers_id"
+    t.index ["quiz_answer_id"], name: "index_question_answers_on_quiz_answer_id"
     t.index ["quiz_question_id"], name: "index_question_answers_on_quiz_question_id"
   end
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
   create_table "quiz_answers", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "quiz_id", null: false
-    t.integer "result"
+    t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_quiz_answers_on_quiz_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
 
   add_foreign_key "alternatives", "questions"
   add_foreign_key "question_answers", "alternatives"
-  add_foreign_key "question_answers", "quiz_answers", column: "quiz_answers_id"
+  add_foreign_key "question_answers", "quiz_answers"
   add_foreign_key "question_answers", "quiz_questions"
   add_foreign_key "quiz_answers", "quizzes"
   add_foreign_key "quiz_answers", "users"

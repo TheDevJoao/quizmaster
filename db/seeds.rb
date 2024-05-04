@@ -1,4 +1,6 @@
-question_1 = Question.create!(
+# frozen_string_literal: true
+
+question_one = Question.create!(
   statement: 'How much is 1 + 1?',
   alternatives: [
     Alternative.new(statement: '1', correct: false),
@@ -8,7 +10,7 @@ question_1 = Question.create!(
   ]
 )
 
-question_2 = Question.create!(
+question_two = Question.create!(
   statement: 'How much is 2 + 2?',
   alternatives: [
     Alternative.new(statement: '1', correct: false),
@@ -18,7 +20,7 @@ question_2 = Question.create!(
   ]
 )
 
-question_3 = Question.create!(
+question_three = Question.create!(
   statement: 'Which of these are prime numbers?',
   alternatives: [
     Alternative.new(statement: '1', correct: false),
@@ -32,10 +34,10 @@ Quiz.create!(
   title: 'Basic Algebra',
   description: 'This is a basic algebra quiz',
   quiz_questions: [
-    QuizQuestion.new(question: question_1, position: 1, weight: 30),
-    QuizQuestion.new(question: question_2, position: 2, weight: 30),
-    QuizQuestion.new(question: question_3, position: 3, weight: 40)
+    QuizQuestion.new(question: question_one, position: 1, weight: 30),
+    QuizQuestion.new(question: question_two, position: 2, weight: 30),
+    QuizQuestion.new(question: question_three, position: 3, weight: 40)
   ]
 )
 
-user = User.create!(email: 'user@email.com', password: 's3nh4f4c1l')
+User.create!(email: 'user@email.com', password: 's3nh4f4c1l')

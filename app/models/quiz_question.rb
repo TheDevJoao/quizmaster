@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuizQuestion < ApplicationRecord
   belongs_to :question
   belongs_to :quiz
@@ -9,11 +11,16 @@ class QuizQuestion < ApplicationRecord
 
   private
 
+  # rubocop:disable Metrics/AbcSize
   def weight_must_be_integer
     return unless question.present? && weight.present?
 
     correct_alternatives = question.alternatives.select(&:correct?).count
+    incorrect_alternatives = question.alternatives.reject(&:correct?).count
 
-    errors.add(:base, :weight_must_be_integer) if weight % correct_alternatives > 0
+    return unless (weight % correct_alternatives).positive? || (weight % incorrect_alternatives).positive?
+
+    errors.add(:base, :weight_must_be_integer)
   end
+  # rubocop:enable Metrics/AbcSize
 end

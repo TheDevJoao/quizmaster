@@ -13,10 +13,19 @@
         <%= quiz.description %>
       </div>
 
+      <% if quiz.quiz_answers.any? %>
+        <strong>My scores:</strong>
+        <ul>        
+          <% quiz.quiz_answers.each do |quiz_answer| %>
+            <li><%= quiz_answer.score %> on <%= quiz_answer.created_at %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
       <div>
-        <%= link_to "Edit", edit_quiz_path(quiz.id) %>
-        <%= link_to "Delete", quiz_path(quiz.id), data: { turbo_method: :delete } %>
-        <%= link_to "Start", new_quiz_quiz_answer_path(quiz.id) %>
+        <%= link_to "Edit", edit_quiz_path(quiz.id) if quiz.quiz_answers.empty? %>
+        <%= link_to "Delete", quiz_path(quiz.id), data: { turbo_method: :delete } if quiz.quiz_answers.empty? %>
+        <%= link_to (quiz.quiz_answers.any? ? "Try again" : "Start"), new_quiz_quiz_answer_path(quiz.id) %>
       </div>
     </div>
   <% end %>

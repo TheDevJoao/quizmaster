@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateQuestionAnswers < ActiveRecord::Migration[7.1]
   def change
     create_table :question_answers do |t|

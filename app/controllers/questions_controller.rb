@@ -1,10 +1,12 @@
-class QuestionsController < ApplicationController  
+# frozen_string_literal: true
+
+class QuestionsController < ApplicationController
   def index
     @questions = Question.all
   end
 
   def new
-    @question = Question.new    
+    @question = Question.new
   end
 
   def create
@@ -12,7 +14,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to questions_url, notice: "Question was successfully created." }
+        format.html { redirect_to questions_url, notice: 'Question was successfully created.' }
         format.json { head :created }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -26,7 +28,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.destroy
-        format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
+        format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
         format.json { head :no_content }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,8 +38,10 @@ class QuestionsController < ApplicationController
   end
 
   private
-    
+
   def question_params
-    params.require(:question).permit(:statement, :description, alternatives_attributes: [:id, :statement, :description, :correct])
+    params.require(:question).permit(
+      :statement, :description, alternatives_attributes: %i[id statement description correct]
+    )
   end
 end
