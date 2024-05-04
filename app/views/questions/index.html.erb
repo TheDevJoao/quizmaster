@@ -1,13 +1,10 @@
-<p style="color: green"><%= notice %></p>
-<p style="color: red"><%= error %></p>
-
 <h1>Questions</h1>
 
 <div id="questions">
   <% @questions.each do |question| %>
     <%= render question %>
     <p>
-      <%= link_to "Show this question", question %>
+      <%= link_to "Delete", question_path(question.id), data: { turbo_method: :delete } %>
     </p>
   <% end %>
 </div>

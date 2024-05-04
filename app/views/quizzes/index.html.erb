@@ -1,12 +1,36 @@
-<p style="color: green"><%= notice %></p>
-<p style="color: red"><%= error %></p>
-
 <h1>Quizzes</h1>
 
-<div id="quizzes">
+<div>
   <% @quizzes.each do |quiz| %>
-    <%= render quiz %>
+    <div>
+      <div>
+        <strong>Title:</strong>
+        <%= quiz.title %>
+      </div>
+
+      <div>
+        <strong>Details:</strong>
+        <%= quiz.description %>
+      </div>
+
+      <% if quiz.quiz_answers.any? %>
+        <strong>My scores:</strong>
+        <ul>        
+          <% quiz.quiz_answers.each do |quiz_answer| %>
+            <li><%= quiz_answer.score %> on <%= quiz_answer.created_at %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div>
+        <%= link_to "Edit", edit_quiz_path(quiz.id) if quiz.quiz_answers.empty? %>
+        <%= link_to "Delete", quiz_path(quiz.id), data: { turbo_method: :delete } if quiz.quiz_answers.empty? %>
+        <%= link_to (quiz.quiz_answers.any? ? "Try again" : "Start"), new_quiz_quiz_answer_path(quiz.id) %>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%#= link_to "New quiz", new_quiz_path %>
+<p>
+  <%= link_to "New quiz", new_quiz_path %>
+</p>
