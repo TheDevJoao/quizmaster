@@ -1,13 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
-  resources :quizzes
-  resources :questions
-  resources :quiz_sessions do
-    resources :steps, controller: 'quiz_sessions/steps'
+
+  resources :quizzes, except: :show do
+    resources :quiz_answers, only: %i[new create]
   end
-  resources :users
+  resources :questions, only: %i[index new create destroy]
 
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  root "quizzes#index"
+  root 'quizzes#index'
 end

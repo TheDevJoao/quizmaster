@@ -1,2 +1,0 @@
-module QuizSessions::StepsHelper
-end

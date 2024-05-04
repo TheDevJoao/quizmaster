@@ -1,12 +1,24 @@
+# frozen_string_literal: true
+
 class Question < ApplicationRecord
-  include AttrJson::Record
+  has_many :quiz_questions, dependent: :restrict_with_error
+  has_many :quizzes, through: :quiz_questions
+  has_many :alternatives, dependent: :destroy
 
-  has_many :question_quizzes
-  has_many :quizzes, through: :question_quizzes
+  accepts_nested_attributes_for :alternatives
 
-  attr_json_config(default_container_attribute: :config)
+  validates :statement, presence: true
+  validate :must_have_alternatives
 
-  attr_json :type, :string
-  attr_json :alternatives, Question::Alternatives.to_type, default: [], array: true
-  attr_json :correct_alternative, :string
+  def multiple?
+    alternatives.select(&:correct?).count > 1
+  end
+
+  private
+
+  def must_have_alternatives
+    return if alternatives.any?(&:correct?)
+
+    errors.add(:base, :must_have_alternatives)
+  end
 end

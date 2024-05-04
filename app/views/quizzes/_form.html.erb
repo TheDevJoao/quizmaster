@@ -1,20 +1,15 @@
-<%= form_with(model: quiz) do |form| %>
-  <% if quiz.errors.any? %>
+<%= form_for @quiz do |form| %>
+  <% if @quiz.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+      <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
 
       <ul>
-        <% quiz.errors.each do |error| %>
+        <% @quiz.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :identifier, style: "display: block" %>
-    <%= form.text_field :identifier %>
-  </div>
 
   <div>
     <%= form.label :title, style: "display: block" %>
@@ -26,14 +21,13 @@
     <%= form.text_field :description %>
   </div>
 
-  <div>
-    <%= form.label :config, style: "display: block" %>
-    <%= form.text_field :config %>
-  </div>
+  <h3>Questions</h3>
 
-  <div>
-    <%= form.label :result_calculator, style: "display: block" %>
-    <%= form.text_field :result_calculator %>
+  <div id="quiz_questions">
+    <%= form.fields_for :quiz_questions do |quiz_question| %>
+      <%= render 'quiz_question_fields', f: quiz_question %>
+    <% end %>
+    <%= link_to_add_association "Add question", form, :quiz_questions %>
   </div>
 
   <div>

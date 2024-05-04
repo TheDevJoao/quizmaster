@@ -1,0 +1,13 @@
+# https://docs.rubocop.org/rubocop/configuration
+
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
