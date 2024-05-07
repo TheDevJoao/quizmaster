@@ -11,11 +11,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "alternatives", force: :cascade do |t|
-    t.bigint "question_id", null: false
+    t.integer "question_id", null: false
     t.string "statement", null: false
     t.string "description"
     t.boolean "correct", default: false, null: false
@@ -25,9 +22,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
   end
 
   create_table "question_answers", force: :cascade do |t|
-    t.bigint "quiz_answer_id", null: false
-    t.bigint "quiz_question_id", null: false
-    t.bigint "alternative_id", null: false
+    t.integer "quiz_answer_id", null: false
+    t.integer "quiz_question_id", null: false
+    t.integer "alternative_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["alternative_id"], name: "index_question_answers_on_alternative_id"
@@ -43,8 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
   end
 
   create_table "quiz_answers", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "quiz_id", null: false
+    t.integer "user_id", null: false
+    t.integer "quiz_id", null: false
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_165913) do
   end
 
   create_table "quiz_questions", force: :cascade do |t|
-    t.bigint "question_id", null: false
-    t.bigint "quiz_id", null: false
+    t.integer "question_id", null: false
+    t.integer "quiz_id", null: false
     t.integer "position", null: false
     t.integer "weight", null: false
     t.datetime "created_at", null: false

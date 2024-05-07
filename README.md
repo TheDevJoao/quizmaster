@@ -7,6 +7,6 @@
 
 ## Challenges
 
-1. Create unit specs to make the suit 100% covered.
+1. Create unit specs to make the suit covered.
 2. Create E2E specs for all features.
 3. Using TDD refactor the `QuizAnswerController` removing all logic for services/usecases.
