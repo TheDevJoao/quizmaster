@@ -14,20 +14,18 @@
   <h1>Answering <%= @quiz_answer.quiz.title %></h1>
 
   <ol>
-    <% @quiz_answer.quiz.quiz_questions.order(:position).each do |quiz_question| %>      
+    <% @quiz_answer.quiz.quiz_questions.order(:position).each do |quiz_question| %>
       <li>
         <strong><%= quiz_question.question.statement %>:</strong>
 
         <ul>
-          <% if quiz_question.question.multiple? %>                   
+          <% if quiz_question.question.multiple? %>
             <% quiz_question.question.alternatives.each do |alternative| %>
               <%= hidden_field("quiz_answer[question_answers_attributes][#{quiz_question.position}#{alternative.id}]", :quiz_question_id, value: quiz_question.id) %>
-              
-              <li><%= check_box("quiz_answer[question_answers_attributes][#{quiz_question.position}#{alternative.id}]", "alternative_id", {}, alternative.id, 0) %> <%= alternative.statement %></li>
-            <% end %>            
+              <li><%= radio_button("quiz_answer[question_answers_attributes][#{quiz_question.position}#{alternative.id}]", "alternative_id", alternative.id) %> <%= alternative.statement %></li>
+            <% end %>
           <% else %>
             <%= hidden_field("quiz_answer[question_answers_attributes][#{quiz_question.position}]", :quiz_question_id, value: quiz_question.id) %>
-
             <% quiz_question.question.alternatives.each do |alternative| %>
               <li><%= radio_button("quiz_answer[question_answers_attributes][#{quiz_question.position}]", "alternative_id", alternative.id) %> <%= alternative.statement %></li>
             <% end %>
