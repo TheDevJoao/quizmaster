@@ -7,12 +7,6 @@ FactoryBot.define do
 
     weight { 100 }
     sequence(:position) { |n| n }
-
-    after(:create) do |quiz_question|
-      quiz_question.question.alternatives.each do |alternative|
-        create(:quiz_answer, quiz_question: quiz_question, alternative: alternative)
-      end
-    end
   end
 
   factory :quiz_question_with_multiple_correct_alternatives, parent: :quiz_question do
